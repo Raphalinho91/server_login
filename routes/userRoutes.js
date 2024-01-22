@@ -18,6 +18,11 @@ const {
         fastify.post("/send-verification-email-password", forgotPassword);
         fastify.post("/verify-password-code", verifyResetCode);
         fastify.post('/update-password', updatePassword);
+        fastify.get("/me",function(request,reply){
+            reply.status(200).send({
+                message:"ok"
+            })
+        })
         resolve();
       } catch (error) {
         console.error("Error in userRoutes plugin:", error);
