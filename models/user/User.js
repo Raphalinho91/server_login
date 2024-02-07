@@ -32,11 +32,62 @@ const UserSchema = new Schema({
   },
   dateOfBirth: {
     type: Date,
-    required: true,
     validate: {
       validator: (date) => !isNaN(Date.parse(date)),
       message: "Invalid date format for date of birth",
     },
+  },
+  pays: {
+    type: String,
+    default: null,
+  },
+  province: {
+    type: String,
+    default: null,
+  },
+  ville: {
+    type: String,
+    default: null,
+  },
+  codePostale: {
+    type: String,
+    default: null,
+  },
+  adresse: {
+    type: String,
+    default: null,
+  },
+  sexe: {
+    type: String,
+    default: null,
+  },
+  taille: {
+    type: String,
+    default: null,
+  },
+  poids: {
+    type: String,
+    default: null,
+  },
+  vetementTaille: {
+    type: String,
+    default: null,
+  },
+  pointure: {
+    type: String,
+    default: null,
+  },
+  numeroBancaire: {
+    type: String,
+    default: null,
+  },
+  dateCarte: {
+    type: String,
+    default: null,
+  },
+  cvcCarte: {
+    type: String,
+    default: null,
   },
   emailVerified: {
     type: Boolean,
@@ -45,6 +96,10 @@ const UserSchema = new Schema({
   verificationToken: {
     type: String,
     default: () => uuid.v4(),
+  },
+  token: {
+    type: String,
+    default: null,
   },
   admin: {
     type: Boolean,
