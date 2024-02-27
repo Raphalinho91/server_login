@@ -1,36 +1,8 @@
-const {
-  addressePost,
-  infoPersoPost,
-  infoBancairePost,
-  getUserAdmin,
-  getAllUser,
-} = require("../controllers/profile/account");
-const {
-  signUp,
-  signIn,
-  sendVerificationEmail,
-  verifyEmailCode,
-  forgotPassword,
-  verifyResetCode,
-  updatePassword,
-  sendEmail,
-  getUserInfo,
-} = require("../controllers/user/authentification");
+const { getUserInfo } = require("../../controllers/user/userInfo");
 
-async function userRoutes(fastify, options) {
+async function userInfoRoute(fastify, options) {
   return new Promise((resolve, reject) => {
     try {
-      fastify.post("/signup", signUp);
-      fastify.post("/signin", signIn);
-      fastify.post("/send-verification-email", sendVerificationEmail);
-      fastify.post("/send-email", sendEmail);
-      fastify.post("/verify-email-code", verifyEmailCode);
-      fastify.post("/send-verification-email-password", forgotPassword);
-      fastify.post("/verify-password-code", verifyResetCode);
-      fastify.post("/update-password", updatePassword);
-      fastify.post("/adresse", addressePost);
-      fastify.post("/info-perso", infoPersoPost);
-      fastify.post("/info-bancaire", infoBancairePost);
       fastify.get(
         "/user-info",
         { preHandler: getUserInfo },
@@ -75,8 +47,6 @@ async function userRoutes(fastify, options) {
           });
         }
       );
-      fastify.get("/admin-user", getUserAdmin);
-      fastify.get("/allUsers", { preHandler: getUserAdmin }, getAllUser);
       resolve();
     } catch (error) {
       console.error("Error in userRoutes plugin:", error);
@@ -85,4 +55,4 @@ async function userRoutes(fastify, options) {
   });
 }
 
-module.exports = userRoutes;
+module.exports = { userInfoRoute };

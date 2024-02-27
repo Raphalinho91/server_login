@@ -137,10 +137,28 @@ const getAllUser = async (request, reply) => {
   }
 };
 
+const deleteOneUser = async (request, reply) => {
+  try {
+    const userId = request.params.userId;
+
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+      return reply.status(404).send({ success: false, message: "User not found" });
+    } 
+
+    return reply.status(200).send({ success: true, message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Error:", error);
+    return reply.status(500).send({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   getUserAdmin,
   infoPersoPost,
   addressePost,
   infoBancairePost,
   getAllUser,
+  deleteOneUser
 };
